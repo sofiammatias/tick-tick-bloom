@@ -1,5 +1,7 @@
 # Tick-Tick-Bloom Challenge from DrivenData
 
+![image](https://drivendata-public-assets.s3.amazonaws.com/competition_cyano_banner.jpeg)
+
 The goal of this challenge was to use satellite imagery to detect and classify the severity of cyanobacteria blooms in small, inland water bodies. The resulting algorithm will help water quality managers better allocate resources for in situ sampling, and make more informed decisions around public health warnings for critical resources like drinking water reservoirs.
 
 A significant challenge water quality managers face is the formation of harmful algal blooms (HABs). HABs produce toxins that are poisonous to humans and their pets, and threaten marine ecosystems by blocking sunlight and oxygen. One of the major types of HABs is cyanobacteria. Manual water sampling, or “in situ” sampling, is generally used to monitor cyanobacteria in inland water bodies. In situ sampling is accurate, but time intensive and difficult to perform continuously.
@@ -35,15 +37,15 @@ About EDA, there was a lot of it done on the benchmark blog, and I took advantag
 
 <img width="641" alt="image" src="https://user-images.githubusercontent.com/114782592/223540460-6de03be9-7d4e-4b8f-ba54-2c095fa8ac82.png">
 
-This graphic shows class imbalance from region to region, something I've found out by persistently observing one region RMSE much higher than the rest.
+This graphic shows **class imbalance** from region to region, something I've found out by persistently observing one region RMSE much higher than the rest.
 It was when I applied a weight to each of these classes to the model I was using that I could really surpass the benchmark score, from 1.57 to 1.2
 
 # Model
 
 When further studying the benchmark blog, I learned about a new machine learning model, which is an improvement of gradient boosting and decision tree models: LightGBM (Light Gradient Boosting Machine). LGBM is a gradient boosting framework that uses tree based learning algorithms. Find out all about this model [here](https://lightgbm.readthedocs.io/en/latest/index.html).
 
-This model is simple and easy to implement, yet it displays consistently good results for a machine learning model. It has the big advantage of not needing to preprocess categorical data (with one-hot encoding or others) and it does the job for you, as long as you do a little trick: change the dtype for each categorical column to "category" in your Python dataframe.
+This model is simple and easy to implement, yet it displays consistently good results for a machine learning model. It has the big advantage of **not needing to preprocess categorical data** (with one-hot encoding or others) and it does the job for you, as long as you do a little trick: change the dtype for each categorical column to "category" in your Python dataframe.
 
-It has a great deal of parameters you can fine-tune and it is a pain to do it without a automated optimizer, like Optuna.
+It has a great deal of parameters you can fine-tune and it is a pain to do it without a automated optimizer, like Optuna. This was the work done in another challenge ([check the notebook](https://www.kaggle.com/code/sofiamatias/spaceship-titanic)). 
 
 Still, the big breakthrough was to use class weights as one of the model hyperparameters, although the weight values calculation was not that straightforward, but I've ended up using number of rows for each class / total number of rows.  

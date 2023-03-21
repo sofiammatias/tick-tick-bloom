@@ -44,8 +44,26 @@ It was when I applied a weight to each of these classes to the model I was using
 
 When further studying the benchmark blog, I learned about a new machine learning model, which is an improvement of gradient boosting and decision tree models: LightGBM (Light Gradient Boosting Machine). LGBM is a gradient boosting framework that uses tree based learning algorithms. Find out all about this model [here](https://lightgbm.readthedocs.io/en/latest/index.html).
 
+![LGBM](https://lightgbm.readthedocs.io/en/v3.3.2/_images/LightGBM_logo_black_text.svg)
+
 This model is simple and easy to implement, yet it displays consistently good results for a machine learning model. It has the big advantage of **not needing to preprocess categorical data** (with one-hot encoding or others) and it does the job for you, as long as you do a little trick: change the dtype for each categorical column to "category" in your Python dataframe.
 
 It has a great deal of parameters you can fine-tune and it is a pain to do it without a automated optimizer, like Optuna. This was the work done in another challenge ([check the notebook](https://www.kaggle.com/code/sofiamatias/spaceship-titanic)). 
 
-Still, the big breakthrough was to use class weights as one of the model hyperparameters, although the weight values calculation was not that straightforward, but I've ended up using number of rows for each class / total number of rows.  
+Still, the big breakthrough was to use class weights as one of the model hyperparameters, although the weight values calculation was not that straightforward, but I've ended up using number of rows for each class / total number of rows.
+
+# Conclusions
+
+This challenge had several aspects to look for:
+* Using images as features 
+* Loading data with an API
+* Using categorical+numerical features
+* Class imbalance
+* A newfound machine learning model
+
+There were several other aspects to look for, like using properly all features presented (I am still unable to use features for training that are not in a test set), using other images, using other image parameters (like different bands, numerical relations between them) or even using other machine learning techniques to retrieve information from an image. 
+
+I still had time to build and train a convolutional neural network, but it didn't beat the LGBM performance, either because I am too green to use neural networks or because of the nature of data to be processed. I had an opportunity to learn in this challenge about LGBM package, how to deal with class imbalance, and how to use LGBM with categorical features without any preprocessing (LGBM deals with categorical features on its own).
+
+
+
